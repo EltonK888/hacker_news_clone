@@ -1,0 +1,21 @@
+body {
+    padding-top: 50px;
+}
+.storyTitle, .titleLink {
+    color: rgb(185, 56, 56);
+}
+
+.titleLink:hover {
+    color: inherit;
+    text-decoration: none;
+}
+.storyDetails {
+    color: rgb(124, 122, 122)
+}
+.descriptionLink {
+    color: black;
+    text-decoration: underline;
+}
+.descriptionLink:hover {
+    color: black;
+}

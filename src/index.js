@@ -1,12 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
+import Topstories from "./topStories";
+import "bootstrap/dist/css/bootstrap.css"
+import "./main.css"
+import { BrowserRouter as Router, Link, NavLink, Route, Switch } from "react-router-dom"
+import User from "./components/user";
+import Post from "./post"
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const obj = {
+    topstoryIds: null
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+
+export default class App extends Component {
+    render() {
+        const style = {textAlign: "center"}
+        return (
+            <div className="container">
+                <Router>
+                    <h1 style={style}>Hacker News</h1>
+                    <h3><Link to="/">Top</Link> New</h3>
+                    <Route path="/" exact component={Topstories}/>
+                    <Route path="/user/:id" exact component={User}/>
+                    <Route path="/post/:id" exact component={Post}/>
+                </Router>
+            </div>
+        )
+    }
+}
+
+
+
+ReactDOM.render(<App/>, document.getElementById("root"));
