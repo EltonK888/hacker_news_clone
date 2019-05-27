@@ -14,11 +14,10 @@ const obj = {
 
 export default class App extends Component {
     render() {
-        const style = {textAlign: "center"}
         return (
             <div className="container">
                 <Router>
-                    <h1 style={style}>Hacker News</h1>
+                    <h1 style={{textAlign: "center"}}><Link to="/" style={{color: "black"}}>Hacker News</Link></h1>
                     <h3><Link to="/">Top</Link> New</h3>
                     <Route path="/" exact component={Topstories}/>
                     <Route path="/user/:id" exact component={User}/>
