@@ -1,12 +1,12 @@
 import { async } from "q";
 
-const url = "https://hacker-news.firebaseio.com/v0/";
-const prty = ".json?print=pretty";
+export const URL= "https://hacker-news.firebaseio.com/v0/";
+export const PRTY = ".json?print=pretty";
 
 
 
 export async function getStory(id) {
-    const response = await fetch(`${url}/item/${id}${prty}`);
+    const response = await fetch(`${URL}/item/${id}${PRTY}`);
     let b = response.json();
     let d = b.then(c => {
         return c;
@@ -25,3 +25,19 @@ export function getHumanTime(unixTime) {
     return `${month}/${day}/${year}, ${hours}:${minutes} ${amPM}`
 }
 
+
+export async function loadStories(type, that) {
+    const top = await fetch(`${URL}/${type}${PRTY}`);
+    const response = await top.json();
+    console.log(response);
+    let promArray = []
+    response.splice(0,50).forEach(id => {
+        promArray.push(getStory(id));
+    });
+    console.log(promArray)
+    Promise.all(promArray)
+    .then(promRes => {
+        promRes.forEach(i => that.state.stories.push(i));
+        that.setState({stories: that.state.stories, loaded: true});
+    })
+}

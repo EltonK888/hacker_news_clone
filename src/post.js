@@ -48,7 +48,7 @@ export default class Post extends Component {
                 )
             }
         } else {
-            return <h3>loading...</h3>
+            return <h3 className="loading">loading...</h3>
         }
     }
     render() {

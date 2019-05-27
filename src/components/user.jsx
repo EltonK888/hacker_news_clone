@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Story } from "./story"
 import { loadPartialConfig } from '@babel/core';
-import { getStory, getHumanTime, decodeHTML } from "../hackerApi"
+import { getStory, getHumanTime, URL, PRTY } from "../hackerApi"
 
 export default class User extends Component {
     state = {
@@ -28,7 +28,7 @@ export default class User extends Component {
         })
     }
     async userInfo () {
-        let response = await fetch(`https://hacker-news.firebaseio.com/v0/user/${this.props.match.params.id}.json?print=pretty`)
+        let response = await fetch(`${URL}/user/${this.props.match.params.id}${PRTY}`)
         let obj = response.json();
         let userObj = obj.then(c => c);
         return userObj;
@@ -38,10 +38,11 @@ export default class User extends Component {
         if (!this.state.loaded) {
             return (
                 <div>
-                    <h2>loading...</h2>
+                    <h3 className="loading">loading...</h3>
                 </div>
             )
         } else {
+            let stories = this.state.stories.map(story => story.type === "story" && !story.deleted && !story.dead? <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url}/> : null).filter(story => story !== null);
             return (
                 <div>
                     <h2>{this.state.user.id}</h2>
@@ -49,11 +50,12 @@ export default class User extends Component {
                     <p dangerouslySetInnerHTML={{__html: this.state.user.about}}></p>
                     <br/>
                     <h3>Posts</h3>
-                    {this.state.stories.map(story => story.type === "story" && !story.deleted && !story.dead? <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url}/> : "")}
+                    {stories.length === 0 ? <p>This user has not posted yet</p> : stories}
                 </div>
             )
         }
     }
+
     render() {
         return (
             this.loadUser()
