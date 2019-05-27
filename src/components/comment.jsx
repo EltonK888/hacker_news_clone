@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom";
-import { getHumanTime } from "../hackerApi"
+import { getHumanTime } from "../helpers"
 
+/* Component for an individual comment block */
 export default function Comment(props) {
-
     return (
         <div>
             <div className="card bg-light mb-3">

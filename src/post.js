@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import Comment from "./components/comment";
-import { getStory, getHumanTime } from "./hackerApi";
+import { getStory, getHumanTime } from "./helpers";
 import { Story } from "./components/story"
 
+/* The component for individual posts when user wants to see comments of a post */
 export default class Post extends Component {
     state = {
-        story: null,
+        story: null, // to store the information of the story
         loaded: false,
-        comments: []
+        comments: [] // to store the information of all the comments
     }
+
     async componentDidMount() {
         let prom = getStory(this.props.match.params.id)
         prom.then(c => {
@@ -29,26 +31,33 @@ export default class Post extends Component {
         })
     }
     
+    /* method that renders the Post and its comments */
     loadPost() {
         if (this.state.loaded){
             let {story, comments} = this.state;
             if (comments.length === 0) {
                 return (
                     <div>
-                        <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url}/>
-                        <h3>There are no comments</h3>
+                        <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score}/>
+                        <p>There are no comments</p>
                     </div>
                 )
             } else {
                 return (
                     <div>
-                        <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url}/>
-                        {comments.map(c => c.type === "comment" && !c.deleted && !c.dead ? <Comment text={c.text} time={c.time} by={c.by}/> : "")}
+                        <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score}/>
+                        {comments.map(c => c.type === "comment" && !c.deleted && !c.dead ? <Comment key={c.id} text={c.text} time={c.time} by={c.by}/> : "")}
                     </div>
                 )
             }
         } else {
-            return <h3 className="loading">loading...</h3>
+            return (
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border text-danger" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            )
         }
     }
     render() {
