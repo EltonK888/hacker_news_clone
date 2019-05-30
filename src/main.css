@@ -110,7 +110,3 @@ body {
     text-align: center;
     transition: 0.25s ease-in-out
 }
-
-.custom-control-input {
-    background-color: green;
-}
