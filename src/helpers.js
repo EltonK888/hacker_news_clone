@@ -1,3 +1,7 @@
+import React, { Component } from 'react'
+import { Story } from "./components/story"
+
+
 export const URL= "https://hacker-news.firebaseio.com/v0/"; // the base URL to make fetch calls to the Hacker News API
 export const PRTY = ".json?print=pretty"; // if manually visit the http page, will show the json data nicely formatted. Not necessary but helpful for debugging
 
@@ -38,4 +42,12 @@ export async function loadStories(type, that) {
         promRes.forEach(i => that.state.stories.push(i));
         that.setState({stories: that.state.stories, loaded: true});
     })
+}
+
+export function themeTypeStories(darktheme, that) {
+    if (darktheme) {
+        return that.state.stories.map(story => <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score} darkMode={darktheme}/>)
+    } else {
+        return that.state.stories.map(story => <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score} darkMode={darktheme}/>)
+    }
 }

@@ -46,13 +46,13 @@ export default class User extends Component {
                 </div>
             )
         } else {
-            let stories = this.state.stories.map(story => story.type === "story" && !story.deleted && !story.dead? <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score}/> : null).filter(story => story !== null);
+            let stories = this.state.stories.map(story => story.type === "story" && !story.deleted && !story.dead? <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score} darkMode={this.props.darkMode}/> : null).filter(story => story !== null);
             return (
                 <div>
-                    <h2>{this.state.user.id}</h2>
+                    <h2 className={this.props.darkMode ? "dark-mode-text" : ""}>{this.state.user.id}</h2>
                     <p className="storyDetails">Joined <b>{getHumanTime(this.state.user.created)}</b> has <b>{this.state.user.karma}</b> karma</p>
-                    <p className="aboutUser" dangerouslySetInnerHTML={{__html: this.state.user.about}}></p>
-                    <h3>Posts</h3>
+                    <p className={this.props.darkMode ? "aboutUser dark-mode-text" : "aboutUser"} dangerouslySetInnerHTML={{__html: this.state.user.about}}></p>
+                    <h3 className={this.props.darkMode ? "dark-mode-text" : ""}>Posts</h3>
                     {stories.length === 0 ? <p>This user has not posted yet</p> : stories}
                 </div>
             )

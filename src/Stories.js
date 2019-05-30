@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { Story } from "./components/story"
-import { getHumanTime, loadStories } from "./helpers"
+import { loadStories, themeTypeStories } from "./helpers"
 
 
 /* Component to load the Top/New stories */
 export default class Stories extends Component {
     state = {
         stories: [], // Store the stories from fetch call
-        loaded: false
+        loaded: false,
+        darkMode: this.props.darkMode
     }
 
     async componentDidMount() {
@@ -21,7 +21,7 @@ export default class Stories extends Component {
     }
 
     render() {
-        const topStories = this.state.stories.map(story => <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score}/>)
+        const topStories = themeTypeStories(this.props.darkMode, this)
         return (
             <div>
                 {this.state.loaded ? topStories :

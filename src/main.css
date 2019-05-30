@@ -1,45 +1,116 @@
 body {
-    padding-top: 40px;
+    height: 100%;
+}
+.light-mode {
+    background-color: rgb(228, 228, 228);
+    transition: 0.25s ease-in-out;
 }
 /************* header styling **************/
 .active {
     color-adjust: red;
+    transition: 0.25s ease-in-out;
 }
 
 .topNew {
     color: black;
+    transition: 0.25s ease-in-out;
 }
 
 .topNew:hover {
     color: black;
     text-decoration: none;
+    transition: 0.25s ease-in-out;
 }
 
 .header {
-    margin-bottom: 40px;
+    padding: 40px 0px 40px 0px;
 }
 
 /************* styling for Story titles and links **********/
+.story {
+    padding: 15px 20px 0 20px;
+    border-bottom: 1px solid rgb(228,228,228);
+    background-color: #ffffff;
+    transition: 0.25s ease-in-out;
+}
 .storyTitle, .titleLink {
     color: rgb(185, 56, 56);
+    transition: 0.25s ease-in-out;
 }
 
 .titleLink:hover {
     color: inherit;
     text-decoration: none;
+    transition: 0.25s ease-in-out;
 }
 .storyDetails {
-    color: rgb(124, 122, 122)
+    color: rgb(124, 122, 122);
+    transition: 0.25s ease-in-out;
 }
 .descriptionLink {
     color: black;
     text-decoration: underline;
+    transition: 0.25s ease-in-out;
 }
 .descriptionLink:hover {
     color: black;
+    transition: 0.25s ease-in-out
 }
-
+.hackerNews {
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.25s ease-in-out;
+}
 /************* spacing for User about and posts **************/
 .aboutUser {
     margin-bottom: 40px;
+}
+
+/***********Comments*******************/
+.bg-dark { transition: 0.25s ease-in-out; }
+.bg-light { transition: 0.25s ease-in-out; }
+.text-light { transition: 0.25s ease-in-out; }
+
+/************* dark mode **************/
+
+.dark-mode {
+    background-color: #1a1919;
+    transition: 0.25s ease-in-out;
+}
+
+.dark-mode-story {
+    padding: 15px 20px 0 20px;
+    border-bottom: 1px solid rgb(124, 122, 122);
+    background-color: #2b2929;
+    transition: 0.25s ease-in-out;
+}
+
+.dark-mode-text, .dark-mode-text:hover {
+    color: #999;
+    text-decoration: none;
+    transition: 0.25s ease-in-out;
+}
+
+.dark-mode-link, .dark-mode-link:hover {
+    color: #999;
+    text-decoration: underline;
+    font-weight: 400;
+    transition: 0.25s ease-in-out
+}
+
+.dark-mode-topNew, .dark-mode-topNew:hover {
+    color: #999;
+    transition: 0.25s ease-in-out
+}
+
+.dark-mode-hackerNews, .dark-mode-hackerNews:hover {
+    color: rgb(185, 56, 56);
+    text-decoration: none;
+    text-align: center;
+    transition: 0.25s ease-in-out
+}
+
+.custom-control-input {
+    background-color: green;
 }
