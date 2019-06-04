@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Story } from "./components/story"
 
 
@@ -39,15 +39,25 @@ export async function loadStories(type, that) {
     console.log(promArray)
     Promise.all(promArray)
     .then(promRes => {
-        promRes.forEach(i => that.state.stories.push(i));
+        promRes.forEach(i => {
+            try {
+                if (i.type === "story") {
+                    that.state.stories.push(i);
+                }
+            } catch {
+                console.log("invalid story type");
+            }
+        })
         that.setState({stories: that.state.stories, loaded: true});
     })
 }
 
+/* Function to create an array of Top/New stories */
 export function themeTypeStories(darktheme, that) {
-    if (darktheme) {
+    try {
         return that.state.stories.map(story => <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score} darkMode={darktheme}/>)
-    } else {
-        return that.state.stories.map(story => <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score} darkMode={darktheme}/>)
+    }
+    catch {
+        return <h1 style={{color: darktheme ? "rgb(185,56,56)" : "black"}}>Something went wrong, please reload the page</h1>
     }
 }

@@ -7,7 +7,7 @@ export default class Stories extends Component {
     state = {
         stories: [], // Store the stories from fetch call
         loaded: false,
-        darkMode: this.props.darkMode
+        darkMode: this.props.darkMode,
     }
 
     async componentDidMount() {

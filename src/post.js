@@ -38,14 +38,34 @@ export default class Post extends Component {
             if (comments.length === 0) {
                 return (
                     <div>
-                        <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score} darkMode={this.props.darkMode}/>
+                        <Story 
+                            key={story.id}
+                            id={story.id}
+                            title={story.title}
+                            by={story.by}
+                            time={getHumanTime(story.time)}
+                            numComments={story.descendants}
+                            titleLink={story.url}
+                            points={story.score}
+                            darkMode={this.props.darkMode}
+                        />
                         <p>There are no comments</p>
                     </div>
                 )
             } else {
                 return (
                     <div>
-                        <Story key={story.id} id={story.id} title={story.title} by={story.by} time={getHumanTime(story.time)} numComments={story.descendants} titleLink={story.url} points={story.score} darkMode={this.props.darkMode}/>
+                        <Story
+                            key={story.id}
+                            id={story.id}
+                            title={story.title}
+                            by={story.by}
+                            time={getHumanTime(story.time)}
+                            numComments={story.descendants}
+                            titleLink={story.url}
+                            points={story.score}
+                            darkMode={this.props.darkMode}
+                        />
                         {comments.map(c => c.type === "comment" && !c.deleted && !c.dead ? <Comment key={c.id} text={c.text} time={c.time} by={c.by} darkMode={this.props.darkMode}/> : "")}
                     </div>
                 )
