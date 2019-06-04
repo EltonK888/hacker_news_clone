@@ -18,7 +18,7 @@ This is a Hacker News Clone that was created using ReactJS and Bootstrap using t
 |:----:|:----:|
 | Light Mode Home Page ![light mode home](https://github.com/EltonK888/hacker_news_clone/blob/master/images/lightModeHome.PNG) | Dark Mode Home Page ![dark mode home](https://github.com/EltonK888/hacker_news_clone/blob/master/images/darkModeHome.PNG) |
 | Light Mode Comments ![light mode comments](https://github.com/EltonK888/hacker_news_clone/blob/master/images/lightModeComments.PNG) | Dark Mode Comments ![dark mode comments](https://github.com/EltonK888/hacker_news_clone/blob/master/images/darkModeComments.PNG) |
-| Light Mode about User ![light mode user](https://github.com/EltonK888/hacker_news_clone/blob/master/images/lightModeUser.PNG) | Dark Mode about User ![dark mode user](https://github.com/EltonK888/hacker_news_clone/blob/master/images/darkModeUser.PNG) |
+| Light Mode User Page ![light mode user](https://github.com/EltonK888/hacker_news_clone/blob/master/images/lightModeUser.PNG) | Dark Mode User Page ![dark mode user](https://github.com/EltonK888/hacker_news_clone/blob/master/images/darkModeUser.PNG) |
 
 ## What I learned
 * Using the Fetch API to make calls to the Hacker News API to dynamically generate data
