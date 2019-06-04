@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Stories from "./stories";
 import "bootstrap/dist/css/bootstrap.css";
