@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Stories from "./stories";
 import "bootstrap/dist/css/bootstrap.css";
 import "./main.css";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { HashRouter as Router, Route } from "react-router-dom";
 import User from "./components/user";
 import Post from "./post";
 import Header from "./components/header";
@@ -43,7 +43,7 @@ class App extends Component {
         const { darkMode } = this.state;
         return (
             <div className={darkMode ? "dark-mode" : "light-mode"}>
-                <Router>
+                <Router basename="/">
                 <Navbar darkMode={darkMode} themeChange={() => this.handleThemeChange()}/>
                 <div className="container">
                         <Header darkMode={darkMode}/>
