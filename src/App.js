@@ -8,7 +8,6 @@ import Stories from "./stories";
 
 const App = () => {
 
-
     const getInitialTheme = () => {
         const theme = JSON.parse(localStorage.getItem("dark"));
         return theme || false;

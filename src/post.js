@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Comment from "./components/comment";
 import { getStory, getHumanTime } from "./helpers";
 import { Story } from "./components/story"
+import LoadingSpinner from "./components/loadingSpinner";
 
 /* The component for individual posts when user wants to see comments of a post */
-export default class Post extends Component {
-    state = {
-        story: null, // to store the information of the story
-        loaded: false,
-        comments: [] // to store the information of all the comments
-    }
+const Post = (props) => {
 
-    async componentDidMount() {
-        let prom = getStory(this.props.match.params.id)
+    const [story, setStory] = useState(null); // to store the information of the story
+    const [loaded, setLoaded] = useState(false);
+    const [comments, setComments] = useState([]); // to store the information of all the comments
+
+    useEffect(() => {
+        let prom = getStory(props.match.params.id)
         prom.then(c => {
             console.log(c)
-            this.state.story = c;
+            setStory(c);
             let commentArray = c.kids;
             let promArray = []
             if (c.descendants !== 0) {
@@ -25,16 +25,16 @@ export default class Post extends Component {
             }
             Promise.all(promArray)
             .then(promRes =>{
-                promRes.forEach(i => this.state.comments.push(i));
-                this.setState({story: this.state.story, loaded: true, comments: this.state.comments});
+                promRes.forEach(i => comments.push(i));
+                setComments(comments);
+                setLoaded(true);
             })
         })
-    }
+    }, [])
     
     /* method that renders the Post and its comments */
-    loadPost() {
-        if (this.state.loaded){
-            let {story, comments} = this.state;
+    const loadPost = () => {
+        if (loaded){
             if (comments.length === 0) {
                 return (
                     <div>
@@ -47,7 +47,7 @@ export default class Post extends Component {
                             numComments={story.descendants}
                             titleLink={story.url}
                             points={story.score}
-                            darkMode={this.props.darkMode}
+                            darkMode={props.darkMode}
                         />
                         <p>There are no comments</p>
                     </div>
@@ -64,25 +64,21 @@ export default class Post extends Component {
                             numComments={story.descendants}
                             titleLink={story.url}
                             points={story.score}
-                            darkMode={this.props.darkMode}
+                            darkMode={props.darkMode}
                         />
-                        {comments.map(c => c.type === "comment" && !c.deleted && !c.dead ? <Comment key={c.id} text={c.text} time={c.time} by={c.by} darkMode={this.props.darkMode}/> : "")}
+                        {comments.map(c => c.type === "comment" && !c.deleted && !c.dead ? <Comment key={c.id} text={c.text} time={c.time} by={c.by} darkMode={props.darkMode}/> : "")}
                     </div>
                 )
             }
         } else {
             return (
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border text-danger" role="status">
-                        <span class="sr-only">Loading...</span>
-                    </div>
-                </div>
+                <LoadingSpinner/>
             )
         }
     }
-    render() {
-        return (
-            this.loadPost()
-        )
-    }
+    return (
+        loadPost()
+    )
 }
+
+export default Post;
